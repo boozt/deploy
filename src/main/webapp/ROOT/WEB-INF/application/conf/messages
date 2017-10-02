@@ -1,0 +1,31 @@
+# You can specialize this file for each language.
+# For example, for French create a messages.fr file
+#
+validation.required=Gerekli
+validation.minSize=En az %2$d
+validation.maxSize=En çok %2$d
+validation.email=Geçersiz Email
+validation.range=%2$d - %3$d aralığında değil
+validation.min=%2$d dan aşağı olamaz
+validation.max=%2$d den büyük olamaz
+validation.match=Eşit olmalı %2$s
+validation.isTrue=Doğru olmalı
+validation.equals=Eşit olmalı &{%2$s}
+validation.invalid=Geçersiz bir değer
+validation.future=Gelecekte Olmalı
+validation.after=%2$s dan sonra olmalı
+validation.past=Geçmişte olmalı
+validation.before=%2$s den önce olmalı
+validation.object=Hatalı
+validation.notFound=Bu numara ile bir kayıt yok %2$s
+validation.url=Geçersiz URL
+validation.phone=Geçersiz telefon
+validation.ipv4=Geçersiz IP adresi
+validation.ipv6=Geçersiz IP v6 adresi
+
+# Pagination strings
+pagination.pageNumbers=<strong>Found: %d &mdash; Page: %d of %d</strong>
+pagination.next=Next
+pagination.previous=Prev
+pagination.first=First
+pagination.last=Last

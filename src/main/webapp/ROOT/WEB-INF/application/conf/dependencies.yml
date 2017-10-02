@@ -1,0 +1,14 @@
+# Application dependencies
+
+require:
+    - play -> jqueryui 1.0
+    - play -> crud
+    - play -> secure
+    - play -> pdf 0.9
+    - play -> paginate 0.14
+    - org.hibernate -> hibernate-core 3.6.8.Final
+    
+    
+force: true
+
+      

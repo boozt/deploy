@@ -1,0 +1,268 @@
+#{extends 'main.html' /}
+
+#{set 'moreStyles'} 
+   <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/themes/ui-lightness1-8-23/jquery-ui-1.8.23.custom.css'}" charset="${_response_encoding}"/>
+#{/set}  
+
+
+#{set 'moreScripts'}
+
+ <script src="@{'/public/javascripts/jquery-1.8.0.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+ <script src="@{'/public/javascripts/jquery-ui-1.8.23.custom.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+ <script src="@{'/public/javascripts/i18n/jquery-ui-i18n.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+ <script src="@{'/public/javascripts/i18n/jquery.ui.datepicker-tr.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+ <script src="@{'/public/javascripts/utils.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+
+<script language="javascript">
+
+function printPage(id)
+{
+	var html="<html>";
+	html+="<head>";
+	      
+  html+=       "<style> body {color:#000000;font-family:Helvetica,Arial,sans-serif;font-size:small;} ";
+  html+=	    	" table {border:1px solid #BBBBBB;border-collapse:collapse;border-spacing:0;clear:right;margin:1em 0 0 1px;font-size:small;} ";
+  html+=	    	" th  {background-color:#E5ECF9;border:1px solid #BBBBBB;font-weight:bold;padding:3px 6px;text-align:left;} " ;
+  html+=	    	" td {background-color:#FFFFFF;border:1px solid #BBBBBB;padding:3px 6px;text-align:left;vertical-align:top;} " ;
+  html+=	    	" th.numerical,td.numerical {text-align:right;} " ;
+  html+=	    	" .main-title {text-align:center;font-weight:bold;font-size:large ;} img {display:none;} </style>" ;
+        
+	html+="</head>";
+	html+= "<h1>Saray Cam Sipariş Listesi: ${bugun}</h1>" ;
+	html+= document.getElementById(id).innerHTML;
+   html+="</html>";
+
+   
+   var printWin = window.open('','','left=0,top=0,width=800,height=600,toolbar=1,scrollbars=1,status=1');
+   printWin.document.write(html);
+   printWin.document.close();
+   printWin.focus();
+   printWin.print();
+   printWin.close();
+}
+
+
+function updateStatus(id,siparisDurumu) {
+	aciklama=prompt('Yeni Sipariş Durumu ' + siparisDurumu + ' Olsun Mu?');
+	if (aciklama!=null) {
+		  document.forms["durumform"].aciklama.value=aciklama;
+		  document.forms["durumform"].id.value=id;
+		  document.forms["durumform"].siparisDurumu.value=siparisDurumu;
+		  var formData = $("#durumform").serializeArray();
+	        var URL = $("#durumform").attr("action");
+	        $.ajax({
+              url: URL,
+              data: formData,
+              success: function (data) {
+                  $('#siparis-'+id).html(data);
+              }
+          });
+	}
+}
+
+
+function updateIslemStatus(id,islemDurumu, siparisId) {
+	/* Attach a submit handler to the form */
+	   aciklama=prompt('Yeni İşlem Durumu ' + islemDurumu + ' Olsun Mu?');
+	   if (aciklama!=null) {
+		    document.forms["islemdurumform"].aciklama.value=aciklama;
+	        document.forms["islemdurumform"].id.value=id;
+	        document.forms["islemdurumform"].islemDurumu.value=islemDurumu;
+	        var formData = $("#islemdurumform").serializeArray();
+	        var URL = $("#islemdurumform").attr("action");
+	        $.ajax({
+                url: URL,
+                data: formData,
+                success: function (data) {
+                    $('#siparis-'+siparisId).html(data);
+                }
+            });
+	   }
+	
+}
+	
+function siparisAra() {
+	   id=prompt('Sipariş Numarası:');
+	   if (id!=null) {
+	        document.forms["siparisaraform"].id.value=id;
+	        document.forms["siparisaraform"].submit();
+	   }
+	}
+
+
+</script>
+
+
+#{/set}
+
+ 
+<h1><a href="@{IsAkis.bugun(previous)}"><img src="@{'/public/images/previous.png'}" width="20" height="20" /></a>
+     &nbsp;${bugun}&nbsp;
+     <a href="@{IsAkis.bugun(next)}"><img src="@{'/public/images/next.png'}" width="20" height="20" /></a>
+     <a href="@{IsAkis.bugun(0)}" style="padding-left: 20px; font-size: 18px;" onmouseover="this.style.color='blue'"  onmouseout="this.style.color='#2a9ac2'">Bugün'e Git</a>
+     <span style="float: right; margin-right: 10px;"><a href="#" style="padding-left: 20px; font-size: 18px;" onClick="siparisAra()" onmouseover="this.style.color='blue'"  onmouseout="this.style.color='#2a9ac2'">Sipariş Ara</a></span>
+     <span style="float: right; margin-right: 10px;"><a href="@{IsAkis.aylik(0)}" style="padding-left: 20px; font-size: 18px;" onmouseover="this.style.color='blue'"  onmouseout="this.style.color='#2a9ac2'">Aylık Görünüm</a></span>
+</h1>
+
+
+<span style="float: right; margin-right: 10px;"><img src="@{'/public/images/print.gif'}"  onclick="printPage('alltables');"/></span>
+
+<div id="alltables" >
+
+
+#{set i:0 /}
+#{list items:siparisler, as:'siparis'}
+#{if siparis.isler}
+#{set i:i+1 /}
+
+<img src="@{'/public/images/print.gif'}"  onclick="printPage('bugun${i}');"/> 
+<div id="bugun${i}" >
+<div id="siparis-${siparis.id}" >
+<table #{if siparis.durum=='TAMAMLANDI'} class="tabletamam" #{/if}>
+<thead>
+        <tr>
+            <th #{if siparis.oncelik=='ACIL'} style="background: #e00;" #{/if} width="790">Sipariş No: &nbsp;&nbsp;<a style="font-size: 18px; color: white; border-left: 10px;" href="@{Siparisler.siparisBul(siparis.id)}">${siparis.id}</a></th>
+            <th #{if siparis.oncelik=='ACIL'} style="background: #e00; text-align: right;" #{/if} #{else} style="text-align: right;" #{/else} width="160" >
+               <a href="javascript:void(0);">#{if siparis.durum=='BASLAMADI'}<img src="@{'/public/images/baslamadiactive.png'}" alt="Başlamadı" title="Başlamadı"/>#{/if}#{else}<img src="@{'/public/images/baslamadi.png'}" alt="Başlamadı" title="Başlamadı" onClick="updateStatus(${siparis.id},'BASLAMADI')"/>#{/else}</a>
+               <a href="javascript:void(0);">#{if siparis.durum=='CALISILIYOR'}<img src="@{'/public/images/calisiliyoractive.png'}" alt="Çalışılıyor" title="Çalışılıyor"/>#{/if}#{else}<img src="@{'/public/images/calisiliyor.png'}" alt="Çalışılıyor" title="Çalışılıyor" onClick="updateStatus(${siparis.id},'CALISILIYOR')"/>#{/else}</a>
+               <a href="javascript:void(0);">#{if siparis.durum=='BEKLIYOR'}<img src="@{'/public/images/durdurulduactive.png'}" alt="Bekliyor" title="Bekliyor"/>#{/if}#{else}<img src="@{'/public/images/durduruldu.png'}" alt="Bekliyor" title="Bekliyor" onClick="updateStatus(${siparis.id},'BEKLIYOR')"/>#{/else}</a>
+               <a href="javascript:void(0);">#{if siparis.durum=='TAMAMLANDI'}<img src="@{'/public/images/tamamlandiactive.png'}" alt="Tamamlandı" title="Tamamlandı"/>#{/if}#{else}<img src="@{'/public/images/tamamlandi.png'}" alt="Tamamlandı" title="Tamamlandı" onClick="updateStatus(${siparis.id},'TAMAMLANDI')"/>#{/else}</a>
+               
+            </th>
+        </tr>
+</thead>
+</table>
+
+<table #{if siparis.durum=='TAMAMLANDI'} class="tabletamam" #{/if} #{elseif siparis.oncelik=='ACIL'} class="tableacil" #{/elseif}>
+<thead>
+    <tr>
+        <th width="300">#{if orderBy=='musteri.isim'} #{if ascDesc=='desc'}<a href="@{IsAkis.bugun(diff,'musteri.isim','asc')}">Müşteri<img src="@{'/public/images/down.png'}" width="13" height="13" /></a>#{/if} #{else}<a href="@{IsAkis.bugun(diff,'musteri.isim','desc')}">Müşteri<img src="@{'/public/images/up.png'}" width="13" height="13" /></a>#{/else}#{/if}   #{else}<a href="@{IsAkis.bugun(diff,'musteri.isim','desc')}">Müşteri</a>#{/else}</th>
+        <th width="75">#{if orderBy=='durum'} #{if ascDesc=='desc'}<a href="@{IsAkis.bugun(diff,'durum','asc')}">Durum<img src="@{'/public/images/down.png'}" width="13" height="13" /></a>#{/if} #{else}<a href="@{IsAkis.bugun(diff,'durum','desc')}">Durum<img src="@{'/public/images/up.png'}" width="13" height="13" /></a>#{/else}#{/if}   #{else}<a href="@{IsAkis.bugun(diff,'durum','desc')}">Durum</a>#{/else}</th>
+        <th width="70">#{if orderBy=='oncelik'} #{if ascDesc=='desc'}<a href="@{IsAkis.bugun(diff,'oncelik','asc')}">Öncelik<img src="@{'/public/images/down.png'}" width="13" height="13" /></a>#{/if} #{else}<a href="@{IsAkis.bugun(diff,'oncelik','desc')}">Öncelik<img src="@{'/public/images/up.png'}" width="13" height="13" /></a>#{/else}#{/if}   #{else}<a href="@{IsAkis.bugun(diff,'oncelik','desc')}">Öncelik</a>#{/else}</th>
+        <th width="110">#{if orderBy=='baslangicTarihi'} #{if ascDesc=='desc'}<a href="@{IsAkis.bugun(diff,'baslangicTarihi','asc')}">Başlangıç Tarihi<img src="@{'/public/images/down.png'}" width="13" height="13" /></a>#{/if} #{else}<a href="@{IsAkis.bugun(diff,'baslangicTarihi','desc')}">Başalngıç Tarihi<img src="@{'/public/images/up.png'}" width="13" height="13" /></a>#{/else}#{/if}   #{else}<a href="@{IsAkis.bugun(diff,'baslangicTarihi','desc')}">Başlangıç Tarihi</a>#{/else}</th>
+        <th width="95">#{if orderBy=='teslimTarihi'} #{if ascDesc=='desc'}<a href="@{IsAkis.bugun(diff,'teslimTarihi','asc')}">Teslim Tarihi<img src="@{'/public/images/down.png'}" width="13" height="13" /></a>#{/if} #{else}<a href="@{IsAkis.bugun(diff,'teslimTarihi','desc')}">Teslim Tarihi<img src="@{'/public/images/up.png'}" width="13" height="13" /></a>#{/else}#{/if}   #{else}<a href="@{IsAkis.bugun(diff,'teslimTarihi','desc')}">Teslim Tarihi</a>#{/else}</th>
+        <th width="350"><a href="javascript:void(0);">Açıklama</a></th>
+    </tr>
+</thead>
+ 
+    <tr>
+        <td>${siparis.musteri}</td>
+        <td>${siparis.durum}</td>
+        <td>${siparis.oncelik}</td>
+        <td>${siparis.baslangictarihi}</td>
+        <td>${siparis.teslimtarihi}</td>
+        <td>${siparis.aciklama}</td>
+    </tr>
+</table>
+
+<table #{if siparis.durum=='TAMAMLANDI'} class="tabletamam" #{/if} #{elseif siparis.oncelik=='ACIL'} class="tableacil" #{/elseif}>
+     <thead>
+        <tr>
+            <th width="100">İş</th>
+            <th width="125">CamTipi</th>
+            <th width="50">Adet</th>
+            <th width="50">Kalınlık</th>
+            <th width="40">Boy</th>
+            <th width="40">En</th>
+            <th width="50">Renk</th>
+            <th width="75">Cam Bizden</th>
+            <th width="420">Açıklama</th>
+        </tr>
+    </thead>
+    #{list items:siparis.isler, as:'is'}
+      <tr>
+         <td><!--a href="@{Siparisler.isBul(is.isid)}">${is.isid}</a--></td>
+         <td>${is.camtipi}</td>
+         <td>${is.adet}</td>
+         <td>${is.kalinlik}</td>
+         <td>${is.boy}</td>
+         <td>${is.en}</td>
+         <td>${is.renk}</td>
+         <td>${is.cambizden}</td>
+         <td>${is.isaciklama}</td>
+      </tr>
+       <tr>
+            <td colspan="5" style="font-weight: bold;"></td>
+            <td width="200" style="font-weight: bold;">Tarih</td>
+      	  	<td width="100" style="font-weight: bold;">Durum</td>
+      	  	<td width="100" style="font-weight: bold;">Kullanıcı</td>
+      	  	<td width="600" style="font-weight: bold;">Açıklama</td>
+          </tr> 
+      #{list items:is.secilmisislemler, as:'islem'}
+         #{if (islem.secili)}
+          <tr>
+            <td style="font-weight: bold;">${islem.islem} </td>
+            <td colspan="2">
+            <div id="islem-${islem.id}">
+            <a href="javascript:void(0);">#{if islem.durum=='BASLAMADI'}<img src="@{'/public/images/baslamadiactive-small.png'}" alt="Başlamadı" title="Başlamadı"/>#{/if}#{else}<img src="@{'/public/images/baslamadi-small.png'}" alt="Başlamadı" title="Başlamadı" onClick="updateIslemStatus(${islem.id},'BASLAMADI',${siparis.id})"/>#{/else}</a>
+            <a href="javascript:void(0);">#{if islem.durum=='CALISILIYOR'}<img src="@{'/public/images/calisiliyoractive-small.png'}" alt="Çalışılıyor" title="Çalışılıyor"/>#{/if}#{else}<img src="@{'/public/images/calisiliyor-small.png'}" alt="Çalışılıyor" title="Çalışılıyor" onClick="updateIslemStatus(${islem.id},'CALISILIYOR',${siparis.id})"/>#{/else}</a>
+            <a href="javascript:void(0);">#{if islem.durum=='BEKLIYOR'}<img src="@{'/public/images/durdurulduactive-small.png'}" alt="Bekliyor" title="Bekliyor"/>#{/if}#{else}<img src="@{'/public/images/durduruldu-small.png'}" alt="Bekliyor" title="Bekliyor" onClick="updateIslemStatus(${islem.id},'BEKLIYOR',${siparis.id})"/>#{/else}</a>
+           	<a href="javascript:void(0);">#{if islem.durum=='TAMAMLANDI'}<img src="@{'/public/images/tamamlandiactive-small.png'}" alt="Tamamlandı" title="Tamamlandı"/>#{/if}#{else}<img src="@{'/public/images/tamamlandi-small.png'}" alt="Tamamlandı" title="Tamamlandı" onClick="updateIslemStatus(${islem.id},'TAMAMLANDI',${siparis.id})"/>#{/else}</a>
+           	</div>
+            </td>
+            <td>${islem.durum}</td>
+            <td colspan="5" />
+          </tr> 
+		#{list items:islem.islemHareketleri, as:'hareket'}
+			<tr>
+				<td colspan="5">
+	   			<td>${hareket.tarih}</td>
+	   			<td>${hareket.yeniDurum}</td>
+	   			<td>${hareket.kullanici}</td>
+	   			<td>${hareket.aciklama}</td>
+			</tr>
+		#{/list}
+        #{/if}
+      #{/list}
+    #{/list}
+</table>
+
+<!-- 
+<table #{if siparis.durum=='TAMAMLANDI'} class="tabletamam" #{/if}  #{elseif siparis.oncelik=='ACIL'} class="tableacil" #{/elseif}>
+     <thead>
+        <tr>
+            <th width="250">Sipariş Hareketleri</th>
+            <th width="100">Eski Durum</th>
+            <th width="100">Yeni Durum</th>
+            <th width="100">Kullanıcı</th>
+            <th width="400">Açıklama</th>
+        </tr>
+    </thead>
+    #{list items:siparis.hareketler, as:'hareket'}
+      <tr>
+         <td>${hareket.tarih}</td>
+         <td>${hareket.eskiDurum}</td>
+         <td>${hareket.yeniDurum}</td>
+         <td>${hareket.kullanici}</td>
+         <td>${hareket.aciklama}</td>
+      </tr>
+   #{/list}
+
+</table>
+ -->
+ </div>
+</div>
+<br/>
+#{/if}   
+#{/list}
+
+
+</div>
+
+<form id="durumform"  action="@{Siparisler.durumGuncelleBugun()}" style="border: 0px;">
+ <input type='hidden' name='id'/>
+ <input type='hidden' name='siparisDurumu'/>
+ <input type='hidden' name='diff' value="${diff}"/>
+ <input type='hidden' name='aciklama'/>
+</form>
+
+<form id="islemdurumform" name="islemdurumform" action="@{Islemler.durumGuncelleBugun()}" style="border: 0px;">
+ <input type='hidden' name='id'/>
+ <input type='hidden' name='islemDurumu'/>
+ <input type='hidden' name='diff' value="${diff}"/>
+ <input type='hidden' name='aciklama'/>
+</form>
+
+<form id="siparisaraform"  action="@{IsAkis.bugunId()}" style="border: 0px;">
+ <input type='hidden' name='id'/>
+</form>

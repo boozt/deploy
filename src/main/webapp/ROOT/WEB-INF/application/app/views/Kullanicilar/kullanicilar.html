@@ -1,0 +1,26 @@
+#{extends 'main.html' /}
+<h1>Kullanıcılar</h1>
+<div id="yenitableitemalt">
+<a href="@{Kullanicilar.yeni}">+ Yeni Kullanıcı</a>
+</div>
+<br/>
+<table>
+<thead>
+    <tr>
+        <th width="425">Kullanıcı Adı</th>
+        <th width="425">Email</th>
+        <th width="100">Yetkili Kullanici</th>
+        <th width="24">Sil</th>
+    </tr>
+</thead>
+ <tbody>
+#{list items:kullanicilar, as:'kullanici'}
+    <tr>
+        <td><a href="@{Kullanicilar.kullanici(kullanici.id)}">${kullanici.kullaniciAdi}</a></td>
+        <td>${kullanici.email}</td>
+        <td>#{if (kullanici.admin)} Evet #{/if}#{else}Hayır#{/else}</td>
+        <td><a href="@{Kullanicilar.sil(kullanici.id)}"><img  name="sil" alt="sil" src="@{'/public/images/delete.png'}" alt="sil"/></a></td>
+    </tr>
+#{/list}
+</tbody>
+</table>

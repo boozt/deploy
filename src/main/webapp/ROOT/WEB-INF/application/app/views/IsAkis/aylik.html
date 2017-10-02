@@ -1,0 +1,146 @@
+#{extends 'main.html' /}
+<style>
+body {  font: 12px Arial;  }
+h1 { font-size: 26px; margin: 0; }
+
+a.YOK:link {color: #3D4C53; background: #ffffff; font-weight: italic;}
+a.YOK:active {color: #3D4C53; background: #ffffff; font-weight: italic;}
+a.YOK:visited {color: #3D4C53; background: #ffffff; font-weight: italic;}
+a.YOK:hover {color: #3D4C53; background: #ffffff; font-weight: normal;}
+
+a.AZ:link {color: #70B7EA; background: #ffffff; font-style: italic;}
+a.AZ:active {color: #70B7EA; background: #ffffff; font-style: italic;}
+a.AZ:visited {color: #70B7EA; background: #ffffff; font-style: italic;}
+a.AZ:hover {color: #70B7EA; background: #ffffff; font-style: normal;}  
+
+a.ORTA:link {color: #A9CF54; background: #ffffff; font-style: italic;}
+a.ORTA:active {color: #A9CF54; background: #ffffff; font-style: italic;}
+a.ORTA:visited {color: #A9CF54; background: #ffffff; font-style: italic;}
+a.ORTA:hover {color: #A9CF54; background: #ffffff; font-style: normal;}  
+
+a.YUKSEK:link {color: #FFC967; background: #ffffff; font-style: italic;}
+a.YUKSEK:active {color: #FFC967; background: #ffffff; font-style: italic;}
+a.YUKSEK:visited {color: #FFC967; background: #ffffff; font-style: italic;}
+a.YUKSEK:hover {color: #FFC967; background: #ffffff; font-style: normal;}
+
+a.ACIL:link {color: #e00; background: #ffffff; font-style: italic;}
+a.ACIL:active {color: #e00; background: #ffffff; font-style: italic;}
+a.ACIL:visited {color: #e00; background: #ffffff; font-style: italic;}
+a.ACIL:hover {color: #e00; background: #ffffff; font-style: normal;}  
+   
+#calendar {
+   margin: 0;
+   padding: 0;
+   width: 959px;
+   border: 2px solid #333;
+   background-color: #ddd;
+   font: 12px Arial;
+       }
+#calendar li {
+   list-style-position: inside;
+   font-weight: bold;
+   width: 125px;
+   height: 800px;
+   border: 1px solid #999;
+   float: left;
+   background-color: #fff;
+   padding: 5px;
+   overflow: hidden; }
+#calendar li:hover {
+   overflow: visible; }
+#calendar li ul {
+   margin: 0;
+   padding: 0;
+   clear: both; }
+#calendar li ul li {
+   list-style: none;
+   font-weight: normal;
+   float: none;
+   border: none;
+   padding: 5px 0;
+   margin: 0; }
+#calendar li:hover ul li, #calendar li.hover ul li {
+   position: absolute;
+   width: 150px;
+   margin-left: -38px;
+   height: auto;
+   background-color: #8cf;
+   border: 1px solid #069;
+   padding: 10px;
+   z-index: 10; }
+#calendar li.monday {
+   margin-left: 0; }
+#calendar li.tuesday {
+   margin-left: 137px; }
+#calendar li.wednesday {
+   margin-left: 274px; }
+#calendar li.thursday {
+   margin-left: 411px; }
+#calendar li.friday {
+   margin-left: 548px; }
+#calendar li.saturday {
+   margin-left: 685px; }
+#calendar li.sunday {
+   margin-left: 822px; }
+.clear {
+   clear: both; 
+   }
+#calendarheader p.monday {
+   margin-left: 30px; display:inline;}
+#calendarheader p.tuesday {
+   margin-left: 80px; display:inline;}
+#calendarheader p.wednesday {
+   margin-left: 85px; display:inline;}
+#calendarheader p.thursday {
+   margin-left: 80px; display:inline;}
+#calendarheader p.friday {
+   margin-left: 75px; display:inline;}
+#calendarheader p.saturday {
+   margin-left: 80px; display:inline;}
+#calendarheader p.sunday {
+   margin-left: 80px; display:inline;}   
+#calendarheader p {
+   font-size: 14px;
+   font-weight: bold;
+   
+}   
+</style>
+</head>
+<body>
+
+<h1><a href="@{IsAkis.aylik(previous)}"><img src="@{'/public/images/previous.png'}" width="20" height="20" /></a>
+     &nbsp;${ayyil}&nbsp;
+     <a href="@{IsAkis.aylik(next)}"><img src="@{'/public/images/next.png'}" width="20" height="20" /></a>
+     <a href="@{IsAkis.bugun(0)}" style="padding-left: 20px; font-size: 18px;" onmouseover="this.style.color='blue'"  onmouseout="this.style.color='#2a9ac2'">Bugün'e Git</a>
+</h1>
+
+<div id="calendarheader">
+   <p class="monday">Pazartesi</p>
+   <p class="tuesday">Salı</p>
+   <p class="wednesday">Çarşamba</p>
+   <p class="thursday">Perşembe</p>
+   <p class="friday">Cuma</p>
+   <p class="saturday">Cumartesi</p>
+   <p class="sunday">Pazar</p>
+</div>
+
+<ol id="calendar">
+         #{list items:siparisler, as:'siparislist'}
+             <li class="${siparislist_isFirst ? ayinilkgunu : ''}"><br/>
+             
+             #{list items:siparislist, as:'siparis'}
+             #{if siparis.durum=='BASLAMADI'}<img src="@{'/public/images/baslamadiactive.png'}" width='13' height='13'/>#{/if}
+             #{if siparis.durum=='CALISILIYOR'}<img src="@{'/public/images/calisiliyoractive.png'}" width='13' height='13'/>#{/if}
+             #{if siparis.durum=='BEKLIYOR'}<img src="@{'/public/images/durdurulduactive.png'}" width='13' height='13'/>#{/if}
+             #{if siparis.durum=='TAMAMLANDI'}<img src="@{'/public/images/tamamlandiactive.png'}" width='13' height='13'/>#{/if}
+             #{if siparis.durum=='IPTAL'}<img src="@{'/public/images/iptalactive.png'}" width='13' height='13'/>#{/if}
+             <a href="@{Siparisler.siparisBul(siparis.id)}" class="${siparis.oncelik}">${siparis.id}:${siparis.musteri}</a>
+             <br/>
+            #{/list} 
+            </li>
+         #{/list}
+
+   <div class="clear"/>
+</ol>       
+
+

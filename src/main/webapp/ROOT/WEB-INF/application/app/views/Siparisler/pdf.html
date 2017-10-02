@@ -1,0 +1,97 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+</head>
+
+  <body>
+  
+  <div id="alltables" >
+
+#{set i:0 /}
+#{list items:siparisler, as:'siparis'}
+#{if siparis.isler}
+#{set i:i+1 /}
+
+
+<table>
+<thead>
+   <tr>
+            <th width="300">Sipariş No:</th>
+            <th colspan="5" width="700">${siparis.id}</th>
+            
+        </tr>
+      
+    <tr>
+        <th width="300">Müsteri</th>
+        <th width="75">Durum</th>
+        <th width="75">Öncelik</th>
+        <th width="90">Giris Tarihi</th>
+        <th width="95">Teslim Tarihi</th>
+        <th width="365">Açiklama</th>
+    </tr>
+</thead>
+ 
+    <tr>
+        <td>${siparis.musteri}</td>
+        <td>${siparis.durum}</td>
+        <td>${siparis.oncelik}</td>
+        <td>${siparis.baslangictarihi}</td>
+        <td>${siparis.teslimtarihi}</td>
+        <td>${siparis.aciklama}</td>
+    </tr>
+</table>
+
+<table>
+     <thead>
+        <tr>
+            <th width="100">Is No</th>
+            <th width="125">Cam Tipi</th>
+            <th width="50">Adet</th>
+            <th width="50">Kalinlik</th>
+            <th width="50">Boy</th>
+            <th width="50">En</th>
+            <th width="50">Renk</th>
+            <th width="75">Cam Bizden</th>
+            <th width="400">Açiklama</th>
+        </tr>
+    </thead>
+    #{list items:siparis.isler, as:'is'}
+      <tr>
+         <td>${is.isid}</td>
+         <td>${is.camtipi}</td>
+         <td>${is.adet}</td>
+         <td>${is.kalinlik}</td>
+         <td>${is.boy}</td>
+         <td>${is.en}</td>
+         <td>${is.renk}</td>
+         <td>${is.cambizden}</td>
+         <td rowspan="2">${is.isaciklama}</td>
+      </tr>
+      <tr>
+         <td>Islemler</td>
+         <td colspan="7">
+         <ul>
+      #{list items:is.secilmisislemler, as:'islem'}
+         #{if (islem.secili)}
+            <li>${islem.islem}</li> 
+         </div>
+         #{/if}
+      #{/list}
+      </ul>
+         </td>
+      </tr>
+      
+   #{/list}
+</table>
+</div>
+<br/>
+#{/if}
+
+      <hr/>   
+#{/list}
+
+
+</div>
+  </body>
+  
+  </html>

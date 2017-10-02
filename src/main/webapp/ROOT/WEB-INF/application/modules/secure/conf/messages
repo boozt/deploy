@@ -1,0 +1,7 @@
+secure.title=Lütfen Kullanıcı Adı ve Şifrenizi Girin
+secure.username=Kullanici Adı:
+secure.password=Şifre:
+secure.remember=Beni Hatırla:
+secure.signin=Giriş
+secure.error=Kullanıcı Adı/Şifre Yanlış
+secure.logout=Oturumunuz Kapatılmıştır.

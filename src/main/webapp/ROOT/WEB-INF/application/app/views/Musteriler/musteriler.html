@@ -1,0 +1,48 @@
+#{extends 'main.html' /}
+<h1>Müşteriler</h1>
+<div id="yenitableitem">
+<a href="@{Musteriler.yeni}">+ Yeni Müşteri</a>
+</div>
+<br/>
+#{form @Musteriler.ara()}
+   <fieldset class="musteribul">
+      <legend>Müşteri Ara</legend>
+      <br/>
+      <div>
+         <label for="musteri">Müşteri:</label> <input type="text" id="musteri" name="musteri" value="${flash.musteri}" />
+         <span class="error">#{error 'musteri' /}</span>
+       </div>
+       <br/><br/><br/>
+     </fieldset>
+       <br/>
+       <div>
+            <button type="submit" id="signin">&nbsp;&nbsp;&nbsp;Müşteri Bul&nbsp;&nbsp;&nbsp;</button> 
+      </div>
+#{/form}
+<br/>
+<div id="yenitableitemalt">
+<a href="@{Musteriler.yeni}">+ Yeni Müşteri</a>
+</div>
+<br/>
+<table>
+<thead>
+    <tr>
+        <th width="300">İsim</th>
+        <th width="150">Telefon</th>
+        <th width="150">Fax</th>
+        <th width="350">Adres</th>
+        <th width="24">Sil</th>
+    </tr>
+</thead>
+ <tbody>
+#{list items:musteriler, as:'musteri'}
+    <tr>
+        <td><a href="@{Musteriler.musteri(musteri.id)}">${musteri.isim}</a></td>
+        <td>${musteri.telefon}</td>
+        <td>${musteri.fax}</td>
+        <td>${musteri.adres}</td>
+        <td><a href="@{Musteriler.sil(musteri.id)}"><img  name="sil" alt="sil" src="@{'/public/images/delete.png'}" alt="sil"/></a></td>
+    </tr>
+#{/list}
+</tbody>
+</table>

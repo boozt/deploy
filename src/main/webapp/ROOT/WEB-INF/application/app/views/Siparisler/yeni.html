@@ -1,0 +1,280 @@
+#{extends 'main.html' /}
+#{set 'moreStyles'} 
+   <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/themes/smoothness/jquery-ui-1.8.16.custom.css'}" charset="${_response_encoding}"/> 
+#{/set}  
+
+#{set 'moreScripts'} 
+ <script src="@{'/public/javascripts/jquery-1.6.2.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+ <script src="@{'/public/javascripts/jquery-ui-1.8.16.custom.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+ <script src="@{'/public/javascripts/i18n/jquery-ui-i18n.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+ <script src="@{'/public/javascripts/i18n/jquery.ui.datepicker-tr.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+    <script>
+       var pickerOpts = {
+            dateFormat:"dd-mm-yy"
+      };
+
+      $(function() {
+          $( "#baslangictarihi" ).datepicker(pickerOpts);
+          $( "#teslimtarihi" ).datepicker(pickerOpts);
+      });
+  
+   </script>
+   
+   <script language="javascript">
+ function updateStatus(id,siparisDurumu) {
+   aciklama=prompt('Yeni Sipariş Durumu ' + siparisDurumu + ' Olsun Mu?');
+   if (aciklama!=null) {
+        document.forms["durumform"].aciklama.value=aciklama;
+        document.forms["durumform"].id.value=id;
+        document.forms["durumform"].siparisDurumu.value=siparisDurumu;
+        document.forms["durumform"].submit();
+   }
+ }
+ </script>
+ 
+#{/set} 
+<h1>Siparişler</h1>
+<div id="yenitableitem">
+<a href="@{Siparisler.yeni}">+ Yeni Sipariş</a>
+</div>
+<br/>
+#{form @Siparisler.siparisEkleDegistir()}
+   <input type="hidden" id="id" name="id" value="${siparis.id}" />
+   <fieldset class="siparis">
+      <legend>Sipariş Tanım ${siparis.id}&nbsp;</legend>
+      <div>
+         <label for="musteri">Müşteri:</label> 
+         <input type="text" id="musteri" name="musteri" value="${siparis.musteri}" />
+            <script>
+            $("#musteri").autocomplete({
+            	source: function(request, response) {
+            $.ajax({
+            	  url: "@{Musteriler.bul()}",
+            	  dataType: "json",
+            	  data: {
+            		  term: request.term
+            	  },
+            	  success: function(data) {
+            		  response($.map(data,function(item) {
+            			  return {
+            				  label: item.isim,
+            				  value: item.isim
+            			  }
+            		  }));
+            	  }
+            });
+            },
+            minLength: 1
+            });
+            </script>
+         <span class="error">#{error 'musteri' /}</span>
+       </div>
+       <div>
+         <label for="oncelik">Öncelik:</label> 
+         <select id="oncelik" name="oncelik">
+           #{list items:siparis.secilmisOncelik, as:'oncelik'}
+            <option value="${oncelik.value}" #{if oncelik.secili} selected="selected" #{/if}>${oncelik.oncelik}</option>
+          #{/list}
+         </select>
+       </div>
+       <div  class="date">
+         <label for="baslangictarihi">Baslangıç Tarihi:</label> 
+         <input type="text" id="baslangictarihi" name="baslangictarihi"  value="${siparis.baslangictarihi}" />
+         <span class="error">#{error 'baslangictarihi' /}</span> 
+       </div>
+       <div  class="date">
+         <label for="teslimtarihi">Teslim Tarihi:</label> 
+         <input type="text" id="teslimtarihi" name="teslimtarihi"  value="${siparis.teslimtarihi}" />
+         <span class="error">#{error 'teslimtarihi' /}</span> 
+       </div>
+       <div>
+         <label for="aciklama">Açıklama:</label> 
+         <textarea cols="50" rows="5" id="aciklama" name="aciklama" maxlength="500">${siparis.aciklama}</textarea>
+         <span class="error">#{error 'aciklama' /}</span> 
+       </div>
+       <br/>
+
+       
+       #{secure.check 'admin'}
+         #{if siparis.id}  
+         <div style="display: inline-block; text-align: left;" >
+                <button type="submit" id="sipekle">&nbsp;&nbsp;&nbsp;Sipariş Değiştir&nbsp;&nbsp;&nbsp;</button>
+         </div>
+         <div style="display: inline-block; float: right; text-align: right;" >
+               <a href="#">#{if siparis.durum=='BASLAMADI'}<img src="@{'/public/images/baslamadiactive.png'}" alt="Başlamadı" title="Başlamadı"/>#{/if}#{else}<img src="@{'/public/images/baslamadi.png'}" alt="Başlamadı" title="Başlamadı" onClick="updateStatus(${siparis.id},'BASLAMADI')"/>#{/else}</a>
+               <a href="#">#{if siparis.durum=='CALISILIYOR'}<img src="@{'/public/images/calisiliyoractive.png'}" alt="Çalışılıyor" title="Çalışılıyor"/>#{/if}#{else}<img src="@{'/public/images/calisiliyor.png'}" alt="Çalışılıyor" title="Çalışılıyor" onClick="updateStatus(${siparis.id},'CALISILIYOR')"/>#{/else}</a>
+               <a href="#">#{if siparis.durum=='BEKLIYOR'}<img src="@{'/public/images/durdurulduactive.png'}" alt="Bekliyor" title="Bekliyor"/>#{/if}#{else}<img src="@{'/public/images/durduruldu.png'}" alt="Bekliyor" title="Bekliyor" onClick="updateStatus(${siparis.id},'BEKLIYOR')"/>#{/else}</a>
+               <a href="#">#{if siparis.durum=='TAMAMLANDI'}<img src="@{'/public/images/tamamlandiactive.png'}" alt="Tamamlandı" title="Tamamlandı"/>#{/if}#{else}<img src="@{'/public/images/tamamlandi.png'}" alt="Tamamlandı" title="Tamamlandı" onClick="updateStatus(${siparis.id},'TAMAMLANDI')"/>#{/else}</a>
+         </div> 
+         #{/if}
+         #{else}
+         <button type="submit" id="sipgir" >&nbsp;&nbsp;&nbsp;Sipariş Gir&nbsp;&nbsp;&nbsp;</button>
+         #{/else}
+       #{/secure.check}
+ 
+       
+     </fieldset>
+#{/form} 
+
+#{if siparis.id}
+#{form @Siparisler.isEkleDegistir()}
+    <input type="hidden" id="id" name="id" value="${siparis.id}" />
+    #{if siparis.isler}
+
+    <div id="yenitableitemalt">
+      <a href="@{Siparisler.siparisBul(siparis.id)}">+ Yeni İş</a>
+    </div>
+    <br/>
+    
+   <fieldset>
+    <legend>Mevcut İşler</legend>
+        <table>
+        <thead>
+            <tr>
+                <th width="75">İş No</th>
+                <th width="100">CamTipi</th>
+                <th width="50">Adet</th>
+                <th width="50">Kalınlık</th>
+                <th width="50">Boy</th>
+                <th width="50">En</th>
+                <th width="50">Renk</th>
+                <th width="75">Cam Bizden</th>
+                <th width="375">Açıklama</th>
+                <th width="24">Sil</th>
+            </tr>
+        </thead>
+         <tbody>
+        #{list items:siparis.isler, as:'is'}
+            <tr>
+                <td><a href="@{Siparisler.isBul(is.isid)}">${is.isid}</a></td>
+                <td>${is.camtipi}</td>
+                <td>${is.adet}</td>
+                <td>${is.kalinlik}</td>
+                <td>${is.boy}</td>
+                <td>${is.en}</td>
+                <td>${is.renk}</td>
+                <td>${is.cambizden}</td>
+                <td>${is.isaciklama}</td>
+                <td>#{secure.check 'admin'}<a href="@{Siparisler.isSil(is.isid)}"><img  name="sil" alt="sil" src="@{'/public/images/delete.png'}" alt="sil"/></a>#{/secure.check}</td>
+            </tr>
+        #{/list}
+        </tbody>
+        </table>
+        </fieldset>
+     #{/if}
+      
+    <input type="hidden" id="isid" name="isid" value="${siparis.seciliis.isid}" />  
+    <fieldset class="is">
+      <legend>İş Tanım ${siparis.seciliis.isid}&nbsp;</legend>
+       <div>
+         <label for="camtipi">Cam Tipi:</label>
+         <select id="camtipi" name="camtipi">
+          #{list items:siparis.seciliis.secilmiscamtipi, as:'camTipi'}
+            <option value="${camTipi.camtipi}" #{if camTipi.secili} selected="selected"#{/if}>${camTipi.camtipi}</option>
+          #{/list}
+         </select>
+         <span class="error">#{error 'camtipi' /}</span> 
+       </div>
+       <div>
+         <label for="adet">Adet:</label> 
+         <input type="text" id="adet" name="adet"  value="${siparis.seciliis.adet}" />
+         <span class="error">#{error 'adet' /}</span> 
+       </div>
+       <div>
+         <label for="boy">Kalınlık(mm):</label> 
+         <input type="text" id="kalinlik" name="kalinlik"  value="${siparis.seciliis.kalinlik}" />
+         <span class="error">#{error 'kalinlik' /}</span> 
+       </div>
+       <div>
+         <label for="boy">Boy(mm):</label> 
+         <input type="text" id="boy" name="boy"  value="${siparis.seciliis.boy}" />
+         <span class="error">#{error 'boy' /}</span> 
+       </div>
+       <div>
+         <label for="en">En(mm):</label> 
+         <input type="text" id="en" name="en"  value="${siparis.seciliis.en}" />
+         <span class="error">#{error 'en' /}</span> 
+       </div>
+       <div>
+         <label for="boy">Cam Rengi:</label> 
+         <input type="text" id="renk" name="renk"  value="${siparis.seciliis.renk}" />
+         <span class="error">#{error 'renk' /}</span> 
+       </div>
+       <div class="radio">
+            <fieldset>
+               <legend><span>Cam Bizden:</span></legend>
+               <div>
+                  <input type="radio" id="cambizdenevet" name="cambizden" value="Evet" #{if (siparis.seciliis.cambizden.equals('Evet'))} checked="checked" #{/if} /> 
+                  <label for="cambizdenevet">Evet</label>
+               </div>
+               <div>
+                  <input type="radio" id="cambizdenhayir" name="cambizden" value="Hayir" #{if (!siparis.seciliis.cambizden.equals('Evet'))} checked="checked" #{/if} /> 
+                  <label for="cambizdenhayir">Hayır</label>
+               </div>
+            </fieldset>
+      </div>
+      <div  class="radio">
+         <fieldset>
+               <legend><span>İşlemler:</span></legend>
+               #{list items:siparis.seciliis.secilmisislemler, as:'islem'}
+                     <div>
+                     <input type="checkbox" id="islemler" name="islemler" #{if islem.secili} checked="checked" #{/if} value="${islem.islem}"/>
+                     <label for="islemler">${islem.islem}</label>
+                     </div>
+               #{/list}
+              </fieldset>
+      </div>
+       <div>
+         <label for="isaciklama">Açıklama:</label> 
+         <textarea cols="50" rows="5" id="isciklama" name="isaciklama"  maxlength="500">${siparis.seciliis.isaciklama}</textarea>
+         <span class="error">#{error 'isaciklama' /}</span> 
+       </div>
+       
+       <br/>
+       #{secure.check 'admin'}
+	       #{if siparis.seciliis.isid}  
+	       <button type="submit" id="sipekle">&nbsp;&nbsp;&nbsp;Siparişin İşini Değiştir&nbsp;&nbsp;&nbsp;</button> 
+	       #{/if}
+	       #{else}
+	       <button type="submit" id="sipgir" >&nbsp;&nbsp;&nbsp;Siparişe İş Ekle&nbsp;&nbsp;&nbsp;</button>
+	       #{/else}
+	   #{/secure.check}   
+     </fieldset>
+#{/form}      
+#{/if}
+
+     
+#{if siparis.hareketler}       
+<form> 
+<fieldset class="is">
+<legend>Sipariş Hareketleri</legend>      
+<table>
+     <thead>
+        <tr>
+            <th width="150">Tarih</th>
+            <th width="100">Eski Durum</th>
+            <th width="100">Yeni Durum</th>
+            <th width="100">Kullanıcı</th>
+            <th width="500">Açıklama</th>
+        </tr>
+    </thead>
+    #{list items:siparis.hareketler, as:'hareket'}
+      <tr>
+         <td>${hareket.tarih}</td>
+         <td>${hareket.eskiDurum}</td>
+         <td>${hareket.yeniDurum}</td>
+         <td>${hareket.kullanici}</td>
+         <td>${hareket.aciklama}</td>
+      </tr>
+   #{/list}
+</table>
+</fieldset>
+</form>
+#{/if}
+
+<form id="durumform"  action="@{Siparisler.durumGuncelleBugunYeni()}" style="border: 0px;">
+ <input type='hidden' name='id'/>
+ <input type='hidden' name='siparisDurumu'/>
+ <input type='hidden' name='diff' value="${diff}"/>
+ <input type='hidden' name='aciklama'/>
+</form>

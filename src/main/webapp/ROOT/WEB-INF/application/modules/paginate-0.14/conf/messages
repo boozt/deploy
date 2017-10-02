@@ -1,0 +1,16 @@
+# Default play-paginate messages
+# You can specialize this file for each language.
+# For exemple, for french create a messages.fr file
+
+#play-paginate.name=play-paginate
+
+play-paginate.first=&laquo;&nbsp;İlk
+play-paginate.prev=&lsaquo;&nbsp;Önceki
+play-paginate.next=Sonraki&nbsp;&rsaquo;
+play-paginate.last=Son&nbsp;&raquo;
+
+play-paginate.summary.display=Kayıtlar
+play-paginate.summary.to=-
+play-paginate.summary.from=. Toplam
+play-paginate.summary.entries=kayıt (Max. 100)
+

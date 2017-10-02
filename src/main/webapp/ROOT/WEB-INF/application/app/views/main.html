@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Saray Cam İşleme - Proje Takip Sitemi</title>
+<meta name="keywords"
+   content="saray cam isleme, cam, cam işleme, aluminum, aluminyum doğrama" />
+<meta name="description"
+   content="saray cam isleme, cam, cam işleme, aluminum, aluminyum doğrama" />
+<link rel="shortcut icon" type="image/png" href="@{'/public/images/logo3.png'}" />
+<link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/main.css'}" />
+<link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/form/form.css'}" />
+<link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/datatable/datatable.css'}" />
+
+ #{get 'moreStyles' /}
+ #{get 'moreScripts' /}
+ 
+</head>
+<body>
+   <div id="container">
+      <div id="title">
+         <img src="@{'/public/images/logo3.png'}" width="50" height="52" />
+         SARAY CAM İŞLEME - PROJE TAKİP SİSTEMİ
+      </div>
+      <div id="menu">
+         <div class="menulink">
+            <ul>
+               <li><a href="@{IsAkis.bugun(0,'oncelik', 'desc')}">İŞ AKIŞI</a></li>
+               #{secure.check 'admin'}
+               <li><a href="@{Siparisler.siparisler()}">SİPARİŞLER</a></li>
+               <li><a href="@{Musteriler.musteriler()}">MÜŞTERİLER</a></li>
+               <li><a href="@{Kullanicilar.kullanicilar()}">KULLANICILAR</a></li>
+               #{/secure.check}
+               <li><a href="@{Secure.logout()}">ÇIKIŞ</a></li>
+            </ul>
+         </div>
+      </div>
+      <div id="main">
+         #{doLayout /}
+      </div>
+      <div id="footer">
+         <div id="footer_left">Copyright © Saray Cam İşleme. Tüm Hakları Saklıdır.</div>
+      </div>
+   </div>
+
+</body>
+</html>

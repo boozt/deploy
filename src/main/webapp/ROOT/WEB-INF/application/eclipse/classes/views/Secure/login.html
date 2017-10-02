@@ -1,0 +1,52 @@
+#{extends 'main.html' /}
+
+
+<div id="login">
+	
+	<h1>&{'secure.title'}</h1>
+		
+	#{form @authenticate()}
+		
+		#{if flash.error}
+			<p class="error">
+				&{flash.error}
+			</p>
+		#{/if}
+		#{if flash.success}
+			<p class="success">
+				&{flash.success}
+			</p>
+		#{/if}
+
+    <fieldset class="login">
+      <legend></legend>
+   	 <br/>
+   	 
+   	  <div>
+         <label for="username">&{'secure.username'}</label>
+         <input type="text" name="username" id="username" value="${flash.username}" />
+       </div>
+   
+		  <div>
+      	<label for="password">&{'secure.password'}</label>
+			<input type="password" name="password" id="password" value="" />
+		   </div>
+		 <br/>
+		  <div>
+          <input type="hidden" name="remember" id="remember" value="false"/>
+        </div>
+      
+     </fieldset>
+   
+      <br/>
+      
+       
+       <div>
+       <center>
+            <button type="submit" id="signin">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&{'secure.signin'}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+       </center> 
+      </div>
+	#{/form}
+</div>

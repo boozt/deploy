@@ -1,0 +1,41 @@
+#{extends 'main.html' /}
+<h1>Kullanicilar</h1>
+#{form @Kullanicilar.ekle()}
+	
+	<fieldset class="kullanici">
+		<legend>Yeni Kullanıcı Bilgileri</legend>
+	 	<div>
+	      <label for="kullaniciadi">Kullanıcı Adı:</label> <input type="text" id="kullaniciadi" name="kullaniciadi" value="${flash.kullaniciadi}" />
+	      <span class="error">#{error 'kullaniciadi' /}</span>
+	    </div>
+	    <div>
+	      <label for="sifre">Şifre:</label> <input type="text" id="sifre" name="sifre"  value="${flash.sifre}" />
+	      <span class="error">#{error 'sifre' /}</span> 
+	    </div>
+	    <div>
+	      <label for="email">Email:</label> <input type="text" id="email" name="email"  value="${flash.email}" />
+	      <span class="error">#{error 'email' /}</span> 
+	    </div>
+	    <div class="radio">
+            <fieldset>
+               <legend><span>Yetkili Kullanıcı:</span></legend>
+               <div>
+                  <input type="radio" id="admintrue" name="admin" value="true" #{if (flash.admin)} checked="checked" #{/if} /> 
+                  <label for="admintrue">Evet</label>
+               </div>
+               <div>
+                  <input type="radio" id="adminfalse" name="admin" value="false" #{if (!flash.admin)} checked="checked" #{/if} /> 
+                  <label for="adminfalse">Hayır</label>
+               </div>
+            </fieldset>
+      </div>
+       <br/>
+	 </fieldset>
+       <br/>
+	    <div>
+      		<button type="submit" id="signin">Kaydet</button> 
+    	</div>
+	    
+    
+    
+#{/form}

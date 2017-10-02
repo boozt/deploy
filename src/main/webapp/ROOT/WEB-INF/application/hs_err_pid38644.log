@@ -1,0 +1,687 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x000000006d9b427f, pid=38644, tid=18124
+#
+# JRE version: 6.0_45-b06
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (20.45-b01 mixed mode windows-amd64 compressed oops)
+# Problematic frame:
+# V  [jvm.dll+0xd427f]
+#
+# If you would like to submit a bug report, please visit:
+#   http://java.sun.com/webapps/bugreport/crash.jsp
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x0000000007bec800):  JavaThread "play-thread-1" [_thread_in_vm, id=18124, stack(0x0000000009190000,0x0000000009290000)]
+
+siginfo: ExceptionCode=0xc0000005, reading address 0xffffffffffffffff
+
+Registers:
+RAX=0x000000077ce3b2d0, RBX=0x0003001100000009, RCX=0x0000000006776d60, RDX=0x0000000000005df8
+RSP=0x00000000092821d0, RBP=0x0000000007bec800, RSI=0x0000000007bec800, RDI=0x0000000006776d60
+R8 =0x0000000007bec800, R9 =0x00000000092826d0, R10=0x0000000000000000, R11=0x000000000000ffff
+R12=0x0000000007bec800, R13=0x0000000000005df8, R14=0x00000000000000b7, R15=0x0000000000005df8
+RIP=0x000000006d9b427f, EFLAGS=0x0000000000010202
+
+Top of Stack: (sp=0x00000000092821d0)
+0x00000000092821d0:   0000000000000140 0000000000000000
+0x00000000092821e0:   0000000000000050 0000000000000000
+0x00000000092821f0:   0000000000230318 0000000007bffde0
+0x0000000009282200:   00000000000001f0 0000000000230cc0
+0x0000000009282210:   00000000002302a8 0000000000000000
+0x0000000009282220:   0000000000000030 0000000000230cc0
+0x0000000009282230:   00000000002302a8 0000000000000000
+0x0000000009282240:   0000000000000000 0000000000000000
+0x0000000009282250:   0000000000000000 0000000000000003
+0x0000000009282260:   0000000000540000 0000000000000030
+0x0000000009282270:   0000000000000021 000007f8e15f5740
+0x0000000009282280:   00000000002302a8 0000000000000000
+0x0000000009282290:   0000000000000030 0000000000230cc0
+0x00000000092822a0:   0000000000540000 0000000000000000
+0x00000000092822b0:   0000000000000000 0000000000000000
+0x00000000092822c0:   0000000000000000 0000000000000003 
+
+Instructions: (pc=0x000000006d9b427f)
+0x000000006d9b425f:   60 e0 4c 89 68 d8 4c 89 78 c8 48 8b 01 4c 63 ea
+0x000000006d9b426f:   4d 8b e0 4a 8b 5c e8 40 48 8b f9 4d 8b fd 74 16
+0x000000006d9b427f:   8b 43 08 0f b6 0d b7 4f 63 00 48 d3 e0 48 03 05
+0x000000006d9b428f:   a5 4f 63 00 eb 04 48 8b 43 08 48 8b 50 10 48 8d 
+
+
+Register to memory mapping:
+
+RAX=0x000000077ce3b2d0 is an oop
+{constant pool} 
+ - klass: {other class}
+ - cache: 0x0000000781f59e28
+ -   1 :  : '()V'
+ -   2 :  : '(Ljava/lang/String;)V'
+ -   3 :  : '<init>'
+ -   4 :  : 'Code'
+ -   5 :  : 'LineNumberTable'
+ -   6 :  : 'SourceFile'
+ -   7 :  : 'java/lang/LinkageError'
+ -   8 :  : 'java/lang/NoClassDefFoundError'
+ -   9 :  : 'java/lang/LinkageError'
+ -  10 :  : 'java/lang/NoClassDefFoundError'
+ -  11 :  : name_index=3 signature_index=1
+ -  12 :  : name_index=3 signature_index=2
+ -  13 :  : klass_index=9 name_and_type_index=11
+ -  14 :  : klass_index=9 name_and_type_index=12
+ -  15 :  : 'NoClassDefFoundError.java'
+
+RBX=0x0003001100000009 is an unknown value
+RCX=0x0000000006776d60 is an unknown value
+RDX=0x0000000000005df8 is an unknown value
+RSP=0x00000000092821d0 is pointing into the stack for thread: 0x0000000007bec800
+RBP=0x0000000007bec800 is a thread
+RSI=0x0000000007bec800 is a thread
+RDI=0x0000000006776d60 is an unknown value
+R8 =0x0000000007bec800 is a thread
+R9 =0x00000000092826d0 is pointing into the stack for thread: 0x0000000007bec800
+R10=0x0000000000000000 is an unknown value
+R11=0x000000000000ffff is an unknown value
+R12=0x0000000007bec800 is a thread
+R13=0x0000000000005df8 is an unknown value
+R14=0x00000000000000b7 is an unknown value
+R15=0x0000000000005df8 is an unknown value
+
+
+Stack: [0x0000000009190000,0x0000000009290000],  sp=0x00000000092821d0,  free space=968k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0xd427f]
+
+Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
+j  java.lang.NoClassDefFoundError.<init>(Ljava/lang/String;)V+2
+v  ~StubRoutines::call_stub
+j  play.data.validation.ValidationPlugin.clear()V+31
+j  play.data.validation.ValidationPlugin.onInvocationException(Ljava/lang/Throwable;)V+0
+j  play.plugins.PluginCollection.onInvocationException(Ljava/lang/Throwable;)V+31
+j  play.Invoker$Invocation.onException(Ljava/lang/Throwable;)V+4
+j  play.jobs.Job.onException(Ljava/lang/Throwable;)V+12
+j  play.jobs.Job.call()Ljava/lang/Object;+161
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.jobs.Job.call()Ljava/lang/Object;+3
+j  play.jobs.Job.run()V+1
+j  play.jobs.JobsPlugin.afterApplicationStart()V+150
+j  play.plugins.PluginCollection.afterApplicationStart()V+30
+j  play.Play.start()V+380
+j  play.Play.detectChanges()V+53
+j  play.Invoker$Invocation.init()Z+9
+j  play.server.PlayHandler$NettyInvocation.init()Z+176
+j  play.Invoker$Invocation.run()V+20
+j  play.server.PlayHandler$NettyInvocation.run()V+16
+j  java.util.concurrent.Executors$RunnableAdapter.call()Ljava/lang/Object;+4
+j  java.util.concurrent.FutureTask$Sync.innerRun()V+30
+j  java.util.concurrent.FutureTask.run()V+4
+j  java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$301(Ljava/util/concurrent/ScheduledThreadPoolExecutor$ScheduledFutureTask;)V+1
+j  java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run()V+15
+j  java.util.concurrent.ThreadPoolExecutor$Worker.runTask(Ljava/lang/Runnable;)V+66
+j  java.util.concurrent.ThreadPoolExecutor$Worker.run()V+33
+j  java.lang.Thread.run()V+11
+v  ~StubRoutines::call_stub
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x0000000007c26800 JavaThread "com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread-#2" daemon [_thread_blocked, id=33808, stack(0x000000000b990000,0x000000000ba90000)]
+  0x0000000007c28000 JavaThread "com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread-#1" daemon [_thread_blocked, id=32708, stack(0x000000000b890000,0x000000000b990000)]
+  0x0000000007c2a800 JavaThread "com.mchange.v2.async.ThreadPoolAsynchronousRunner$PoolThread-#0" daemon [_thread_blocked, id=30308, stack(0x000000000b790000,0x000000000b890000)]
+  0x0000000007c25000 JavaThread "Timer-0" daemon [_thread_blocked, id=10820, stack(0x000000000b690000,0x000000000b790000)]
+  0x0000000007338000 JavaThread "pool-2-thread-6" [_thread_blocked, id=22208, stack(0x0000000009290000,0x0000000009390000)]
+=>0x0000000007bec800 JavaThread "play-thread-1" [_thread_in_vm, id=18124, stack(0x0000000009190000,0x0000000009290000)]
+  0x000000000806f000 JavaThread "pool-2-thread-5" [_thread_blocked, id=25180, stack(0x0000000009090000,0x0000000009190000)]
+  0x0000000008068000 JavaThread "pool-2-thread-4" [_thread_blocked, id=13016, stack(0x0000000008f90000,0x0000000009090000)]
+  0x000000000777f000 JavaThread "pool-2-thread-3" [_thread_blocked, id=17176, stack(0x0000000008e90000,0x0000000008f90000)]
+  0x0000000007b5a800 JavaThread "pool-2-thread-2" [_thread_blocked, id=13868, stack(0x0000000008d90000,0x0000000008e90000)]
+  0x0000000007a58800 JavaThread "New I/O server worker #1-1" [_thread_in_native, id=16136, stack(0x0000000008c90000,0x0000000008d90000)]
+  0x00000000020b1000 JavaThread "DestroyJavaVM" [_thread_blocked, id=20508, stack(0x0000000000430000,0x0000000000530000)]
+  0x0000000008066800 JavaThread "New I/O server boss #1 ([id: 0x0307bd0d, /0.0.0.0:9000])" [_thread_in_native, id=13704, stack(0x0000000008b90000,0x0000000008c90000)]
+  0x00000000066fa000 JavaThread "Low Memory Detector" daemon [_thread_blocked, id=11012, stack(0x0000000006dc0000,0x0000000006ec0000)]
+  0x00000000066f7800 JavaThread "C2 CompilerThread1" daemon [_thread_blocked, id=43332, stack(0x0000000006cc0000,0x0000000006dc0000)]
+  0x00000000066f2000 JavaThread "C2 CompilerThread0" daemon [_thread_blocked, id=28200, stack(0x0000000006bc0000,0x0000000006cc0000)]
+  0x00000000066e5800 JavaThread "JDWP Event Helper Thread" daemon [_thread_blocked, id=39136, stack(0x0000000006ac0000,0x0000000006bc0000)]
+  0x00000000066d5000 JavaThread "JDWP Transport Listener: dt_socket" daemon [_thread_in_native, id=25036, stack(0x00000000069c0000,0x0000000006ac0000)]
+  0x00000000066c0800 JavaThread "Attach Listener" daemon [_thread_blocked, id=4732, stack(0x00000000068c0000,0x00000000069c0000)]
+  0x00000000021ac000 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=15768, stack(0x00000000065c0000,0x00000000066c0000)]
+  0x0000000002179800 JavaThread "Finalizer" daemon [_thread_blocked, id=16232, stack(0x00000000064c0000,0x00000000065c0000)]
+  0x0000000002170800 JavaThread "Reference Handler" daemon [_thread_blocked, id=26544, stack(0x00000000063c0000,0x00000000064c0000)]
+
+Other Threads:
+  0x000000000216b000 VMThread [stack: 0x00000000062c0000,0x00000000063c0000] [id=38028]
+  0x000000000670f800 WatcherThread [stack: 0x0000000006ec0000,0x0000000006fc0000] [id=16816]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap
+ PSYoungGen      total 41344K, used 820K [0x00000007d6000000, 0x00000007d88a0000, 0x0000000800000000)
+  eden space 41152K, 1% used [0x00000007d6000000,0x00000007d60cd1d0,0x00000007d8830000)
+  from space 192K, 0% used [0x00000007d8830000,0x00000007d8830000,0x00000007d8860000)
+  to   space 192K, 0% used [0x00000007d8870000,0x00000007d8870000,0x00000007d88a0000)
+ PSOldGen        total 1376256K, used 10754K [0x0000000782000000, 0x00000007d6000000, 0x00000007d6000000)
+  object space 1376256K, 0% used [0x0000000782000000,0x0000000782a80a00,0x00000007d6000000)
+ PSPermGen       total 83840K, used 83303K [0x000000077ce00000, 0x0000000781fe0000, 0x0000000782000000)
+  object space 83840K, 99% used [0x000000077ce00000,0x0000000781f59e90,0x0000000781fe0000)
+
+Code Cache  [0x00000000021c0000, 0x0000000002aa0000, 0x00000000051c0000)
+ total_blobs=2370 nmethods=1726 adapters=603 free_code_cache=41180928 largest_free_block=50112
+
+Dynamic libraries:
+0x0000000000400000 - 0x000000000042f000 	C:\jdk1.6.0_45\bin\javaw.exe
+0x000007f8e15f0000 - 0x000007f8e17b0000 	C:\Windows\SYSTEM32\ntdll.dll
+0x000007f8ded30000 - 0x000007f8dee66000 	C:\Windows\system32\KERNEL32.DLL
+0x000007f8de570000 - 0x000007f8de663000 	C:\Windows\system32\KERNELBASE.dll
+0x000007f8df4e0000 - 0x000007f8df5be000 	C:\Windows\system32\ADVAPI32.dll
+0x000007f8dee70000 - 0x000007f8defbc000 	C:\Windows\system32\USER32.dll
+0x000007f8e1230000 - 0x000007f8e12d5000 	C:\Windows\system32\msvcrt.dll
+0x000007f8dec10000 - 0x000007f8dec58000 	C:\Windows\SYSTEM32\sechost.dll
+0x000007f8defc0000 - 0x000007f8df105000 	C:\Windows\system32\RPCRT4.dll
+0x000007f8dfa60000 - 0x000007f8dfba1000 	C:\Windows\system32\GDI32.dll
+0x000007f8df190000 - 0x000007f8df1c9000 	C:\Windows\system32\IMM32.DLL
+0x000007f8df3c0000 - 0x000007f8df4d6000 	C:\Windows\system32\MSCTF.dll
+0x000000006d8e0000 - 0x000000006e09c000 	C:\jdk1.6.0_45\jre\bin\server\jvm.dll
+0x000007f8db370000 - 0x000007f8db390000 	C:\Windows\SYSTEM32\WINMM.dll
+0x000007f8db330000 - 0x000007f8db363000 	C:\Windows\SYSTEM32\WINMMBASE.dll
+0x000007f8de990000 - 0x000007f8de9df000 	C:\Windows\SYSTEM32\cfgmgr32.dll
+0x000007f8de850000 - 0x000007f8de872000 	C:\Windows\system32\DEVOBJ.dll
+0x000000006d850000 - 0x000000006d85e000 	C:\jdk1.6.0_45\jre\bin\verify.dll
+0x000000006d460000 - 0x000000006d487000 	C:\jdk1.6.0_45\jre\bin\java.dll
+0x000000006d4d0000 - 0x000000006d504000 	C:\jdk1.6.0_45\jre\bin\jdwp.dll
+0x000000006d410000 - 0x000000006d430000 	C:\jdk1.6.0_45\jre\bin\instrument.dll
+0x000000006d6f0000 - 0x000000006d6f8000 	C:\jdk1.6.0_45\jre\bin\npt.dll
+0x000000006d8a0000 - 0x000000006d8b2000 	C:\jdk1.6.0_45\jre\bin\zip.dll
+0x000000006d310000 - 0x000000006d319000 	C:\jdk1.6.0_45\jre\bin\dt_socket.dll
+0x000007f8dfa00000 - 0x000007f8dfa58000 	C:\Windows\system32\WS2_32.dll
+0x000007f8df110000 - 0x000007f8df119000 	C:\Windows\system32\NSI.dll
+0x000007f8ddcf0000 - 0x000007f8ddd4c000 	C:\Windows\system32\mswsock.dll
+0x000000006d6c0000 - 0x000000006d6d7000 	C:\jdk1.6.0_45\jre\bin\net.dll
+0x000000006d6e0000 - 0x000000006d6ec000 	C:\jdk1.6.0_45\jre\bin\nio.dll
+0x000007f8ddd50000 - 0x000007f8ddd6a000 	C:\Windows\SYSTEM32\CRYPTSP.dll
+0x000007f8dd9d0000 - 0x000007f8dda1b000 	C:\Windows\system32\rsaenh.dll
+0x000007f8ddad0000 - 0x000007f8ddaef000 	C:\Windows\SYSTEM32\USERENV.dll
+0x000007f8de4a0000 - 0x000007f8de4b5000 	C:\Windows\SYSTEM32\profapi.dll
+0x000007f8de2e0000 - 0x000007f8de2ea000 	C:\Windows\SYSTEM32\CRYPTBASE.dll
+0x000007f8de280000 - 0x000007f8de2dc000 	C:\Windows\SYSTEM32\bcryptPrimitives.dll
+0x000007f8d6240000 - 0x000007f8d6254000 	C:\Windows\system32\napinsp.dll
+0x000007f8d6260000 - 0x000007f8d6278000 	C:\Windows\system32\pnrpnsp.dll
+0x000007f8dd0e0000 - 0x000007f8dd0f6000 	C:\Windows\system32\NLAapi.dll
+0x000007f8ddb30000 - 0x000007f8ddbc8000 	C:\Windows\SYSTEM32\DNSAPI.dll
+0x000007f8d6280000 - 0x000007f8d6292000 	C:\Windows\System32\winrnr.dll
+0x000007f8d62a0000 - 0x000007f8d62b4000 	C:\Windows\system32\wshbth.dll
+0x000007f8d58c0000 - 0x000007f8d58c8000 	C:\Windows\System32\rasadhlp.dll
+0x000007f8d8df0000 - 0x000007f8d8e1a000 	C:\Windows\SYSTEM32\IPHLPAPI.DLL
+0x000007f8d8dd0000 - 0x000007f8d8dda000 	C:\Windows\SYSTEM32\WINNSI.DLL
+0x000007f8d87f0000 - 0x000007f8d8851000 	C:\Windows\System32\fwpuclnt.dll
+0x000000006d600000 - 0x000000006d60a000 	C:\jdk1.6.0_45\jre\bin\management.dll
+0x000007f8dfc50000 - 0x000007f8dfc57000 	C:\Windows\system32\PSAPI.DLL
+
+VM Arguments:
+jvm_args: -Xdebug -Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=n -Dplay.debug=yes -Dplay.id= -Dapplication.path=C:\BPF\play-1.2.4\bpf -Djava.endorsed.dirs=C:\BPF\play-1.2.4/framework/endorsed -javaagent:C:\BPF\play-1.2.4/framework/play-1.2.4.jar -Dfile.encoding=UTF-8 
+java_command: play.server.Server
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=C:\jdk1.6.0_45
+PATH=C:/jdk1.6.0_45/bin/../jre/bin/server;C:/jdk1.6.0_45/bin/../jre/bin;C:/jdk1.6.0_45/bin/../jre/lib/amd64;C:\jdk1.6.0_45\bin;C:\NBAPowerpack\maven\maven-3.0.3\bin;C:\cygwin64\bin;:\Program Files (x86)\AMD APP\bin\x86_64;c:\Program Files (x86)\AMD APP\bin\x86;c:\Program Files (x86)\Intel\iCLS Client\;c:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;c:\Program Files (x86)\ATI Technologies\ATI.ACE\Core-Static;C:\Program Files (x86)\Windows Live\Shared;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Git\cmd;C:\Ruby193\bin;D:\eclipse-jee-indigo-SR2-win32-x86_64\eclipse;
+USERNAME=nesrin.kaya
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 58 Stepping 9, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 8 , 64 bit Build 9200 
+
+CPU:total 4 (2 cores per cpu, 2 threads per core) family 6 model 58 stepping 9, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, ht
+
+Memory: 4k page, physical 8254740k(4535588k free), swap 10220820k(4468684k free)
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (20.45-b01) for windows-amd64 JRE (1.6.0_45-b06), built on Apr  1 2013 12:31:37 by "java_re" with MS VC++ 8.0 (VS2005)
+
+time: Wed Dec 25 01:25:39 2013
+elapsed time: 61 seconds
+

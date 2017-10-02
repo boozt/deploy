@@ -1,0 +1,159 @@
+#{extends 'main.html' /}
+#{set 'moreStyles'} 
+   <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/themes/ui-lightness/jquery.ui.all.css'}" charset="${_response_encoding}"/>
+   <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/play-pagination.css'}"> 
+   
+#{/set}  
+
+#{set 'moreScripts'} 
+ <script src="@{'/public/javascripts/jquery-1.6.2.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+ <script src="@{'/public/javascripts/jquery-ui-1.8.16.custom.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+ <script src="@{'/public/javascripts/i18n/jquery-ui-i18n.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+ <script src="@{'/public/javascripts/i18n/jquery.ui.datepicker-tr.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+   <script>
+       var pickerOpts = {
+	         dateFormat:"dd-mm-yy"
+	   };
+
+      $(function() {
+    	    $( "#giristarihi1" ).datepicker(pickerOpts);
+    	    $( "#giristarihi2" ).datepicker(pickerOpts);
+    	    $( "#teslimtarihi1" ).datepicker(pickerOpts);
+    	    $( "#teslimtarihi2" ).datepicker(pickerOpts);
+      });
+  
+   </script>
+   
+   
+   <script>
+
+   function silMulti(){
+	   onay=confirm('Siparişler Silinsin Mi?');
+	   if (onay==true) {
+		   var _rows = document.getElementById("siparislertable").rows;
+		   var i;
+		   for (i=0; i < _rows.length; i++) {
+	  	        inputs = _rows[i].getElementsByTagName("input");
+	  	      	if(inputs!=null && inputs[0]!=null && inputs[0].checked) {
+			        document.forms["silform"].ids.value= document.forms["silform"].ids.value + ',' + inputs[0].id ;
+				}
+		   }
+		   document.forms["silform"].mus.value = document.getElementById("musteri").value;
+		   document.forms["silform"].gt1.value = document.getElementById("giristarihi1").value;
+		   document.forms["silform"].gt2.value = document.getElementById("giristarihi2").value;
+		   document.forms["silform"].tt1.value = document.getElementById("teslimtarihi1").value;
+		   document.forms["silform"].tt2.value = document.getElementById("teslimtarihi2").value;
+		   
+		   if (document.forms["silform"].ids.value!=null) {
+			   document.forms["silform"].submit();
+		   }
+	   }
+	}
+
+   function pdfMulti(){
+	   var _rows = document.getElementById("siparislertable").rows;
+	   var i;
+	   for (i=0; i < _rows.length; i++) {
+  	        inputs = _rows[i].getElementsByTagName("input");
+  	      	if(inputs!=null && inputs[0]!=null && inputs[0].checked) {
+		        document.forms["pdfform"].ids.value= document.forms["pdfform"].ids.value + ',' + inputs[0].id ;
+			}
+	   }
+	   if (document.forms["pdfform"].ids.value!=null) {
+		   document.forms["pdfform"].setAttribute("target", '_new');
+		   document.forms["pdfform"].submit();
+		   document.forms["pdfform"].ids = null;
+	   }
+   }
+	
+   </script>
+#{/set} 
+<h1>Siparişler</h1>
+<div id="yenitableitem">
+<a href="@{Siparisler.yeni}">+ Yeni Sipariş</a>
+</div>
+<br/>
+#{form @Siparisler.bul()}
+   <fieldset class="siparisbul">
+      <legend>Sipariş Ara</legend>
+      <div>
+         <label for="musteri">Müşteri:</label> <input type="text" id="musteri" name="musteri" value="${flash.musteri}" />
+         <span class="error">#{error 'musteri' /}</span>
+       </div>
+       <div>
+         <label for="giristarihi1">Giriş Tarihi1:</label> <input type="text" id="giristarihi1" name="giristarihi1"  value="${flash.giristarihi1}" />
+         <span class="error">#{error 'giristarihi1' /}</span>
+       </div>
+       <div>
+         <label for="giristarihi2">Giriş Tarihi2:</label> <input type="text" id="giristarihi2" name="giristarihi2"  value="${flash.giristarihi2}" />
+         <span class="error">#{error 'giristarihi2' /}</span> 
+       </div>
+       <div>
+         <label for="teslimtarihi1">Teslim Tarihi1:</label> <input type="text" id="teslimtarihi1" name="teslimtarihi1"  value="${flash.teslimtarihi1}" />
+         <span class="error">#{error 'teslimtarihi1' /}</span> 
+       </div>
+       <div>
+         <label for="teslimtarihi2">Teslim Tarihi2:</label> <input type="text" id="teslimtarihi2" name="teslimtarihi2"  value="${flash.teslimtarihi2}" />
+         <span class="error">#{error 'teslimtarihi2' /}</span> 
+       </div>
+       <br/>
+     </fieldset>
+       <br/>
+       <div>
+            <button type="submit" id="signin">&nbsp;&nbsp;&nbsp;Sipariş Bul&nbsp;&nbsp;&nbsp;</button> 
+      </div>
+#{/form}
+<div id="yenitableitemalt">
+<a href="#" onclick="pdfMulti()">+Pdf </a><a href="#" onclick="silMulti()">&nbsp;+Sil</a>
+</div>
+<br/>
+<table id="siparislertable">
+<thead>
+    <tr>
+        <th width="24">Seç</th>
+        <th width="50">Sipariş No</th>
+        <th width="250">Müşteri</th>
+        <th width="100">Durum</th>
+        <th width="50">Öncelik</th>
+        <th width="100">Giriş Tarihi</th>
+        <th width="100">Teslim Tarihi</th>
+        <th width="300">Açıklama</th>
+    </tr>
+</thead>
+ <tbody>
+#{paginate.list items:siparisler, as:'siparis'}
+
+    <tr>
+        <td>
+        	<input type="checkbox" id="${siparis.id}" name="${siparis.id}" class="inputtablecheck"/>
+        </td> 
+        <td><a href="@{Siparisler.siparisBul(siparis.id)}">${siparis.id}</a></td>
+        <td>${siparis.musteri}</td>
+        <td>${siparis.durum}</td>
+        <td>${siparis.oncelik}</td>
+        <td>${siparis.baslangictarihi}</td>
+        <td>${siparis.teslimtarihi}</td>
+        <td>${siparis.aciklama}</td>
+    </tr>
+#{/paginate.list}
+ 
+#{paginate.controls items:siparisler /} 
+
+ 
+</tbody>
+</table>
+#{paginate.summary items:siparisler/}
+
+
+<form id="silform"  action="@{Siparisler.siparisSilMulti()}" style="border: 0px;">
+ <input type='hidden' name='ids'/>
+ <input type='hidden' id='mus' name='mus'/>
+ <input type='hidden' id='gt1' name='gt1'/>
+ <input type='hidden' id='gt2' name='gt2'/>
+ <input type='hidden' id='tt1' name='tt1'/>
+ <input type='hidden' id='tt2' name='tt2'/>
+ </form>
+
+<form id="pdfform"  action="@{Siparisler.pdfMulti()}" style="border: 0px;">
+ <input type='hidden' name='ids'/>
+</form>
